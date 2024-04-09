@@ -1,0 +1,11 @@
+/.idea/
+/build/
+/dist/*.exe
+/venv/
+/__pycache__/
+/logfileosd.txt
+/*.spec
+/*.exe
+/*.xml
+/scorecards/
+/config.ini
