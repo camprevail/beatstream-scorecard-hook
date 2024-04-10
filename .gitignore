@@ -9,3 +9,5 @@
 /*.xml
 /scorecards/
 /config.ini
+/*.zip
+/dist-with-url/

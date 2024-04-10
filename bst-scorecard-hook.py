@@ -213,6 +213,8 @@ async def upload_image(filename, image):
                 async with session.post(webhook_url, data=form_data) as response:
                     if response.status == 200:
                         print("Discord uploaded successful")
+                        if not config['Misc'].getboolean('save images'):
+                            osd_message('Scorecard uploaded')
                     else:
                         text = await response.text()
                         raise RuntimeError(f'Discord upload failed. Reason: {response.status} {text}')
