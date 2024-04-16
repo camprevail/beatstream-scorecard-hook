@@ -19,7 +19,7 @@ import aiohttp
 import asyncio
 import psutil
 import time
-from constants import MAP_KEY_NAME, MAP_KEY_CODE
+from constants import *
 
 
 # Prevent multiple instances
