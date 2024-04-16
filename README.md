@@ -8,7 +8,7 @@ should return an image file and the program will download and save it locally, a
 I made this as a temporary solution until my server of choice supports the game's built-in scorecard function (which is still 
 just an xml request containing stage data) and the scorecard generator I wrote, and also as an excercise to see I could figure out where stage data was stored 
 in the game and if python was able to retrieve it, since I don't know enough cpp to make an actual hook or any of this in 
-another language. Needless to say the venture was successful. 
+another language. Needless to say the venture was fun and successful. 
 
 # Installation
 Current version: 1.0  
@@ -47,7 +47,6 @@ any stage you have already completed until the game logs you out. A warning will
 grab stage data before a song is complete.  
 
 <img src="images/scorecard-example.png" width="500">
-<br><br>
 <img src="images/osd-example.png" width="500">
 
 
