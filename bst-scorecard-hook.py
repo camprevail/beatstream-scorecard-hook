@@ -20,6 +20,8 @@ import asyncio
 import psutil
 import time
 from constants import *
+import ssl
+import certifi
 
 
 # Prevent multiple instances
@@ -92,7 +94,7 @@ def get_stagedata(stage=None):
     stagedata.best_score = utils.musicinfodata_get(pm, ptr_CMusicInfoData, stagedata.music_id, stagedata.music_grade, 'best_score')
     stagedata.best_medal = utils.musicinfodata_get(pm, ptr_CMusicInfoData, stagedata.music_id, stagedata.music_grade, 'best_medal')
     stagedata.is_new_record = int(stagedata.play_count > 0 and stagedata.score >= 500000 and stagedata.score > stagedata.best_score)
-    stagedata.player_name = pm.read_string(ptr_playerinfo+8, 17, encoding='shift-jis')
+    stagedata.player_name = pm.read_string(ptr_playerinfo+8, 17, encoding='cp932')
     stagedata.beast_rank = int.from_bytes(pm.read_bytes(ptr_playerinfo + 25, 1), 'little', signed=True)
 
     return stagedata
@@ -210,17 +212,21 @@ async def upload_image(filename, image):
             async with aiohttp.ClientSession() as session:
                 form_data = aiohttp.FormData()
                 form_data.add_field('image/png', image, filename=filename)
-                async with session.post(webhook_url, data=form_data) as response:
+                sslcontext = ssl.create_default_context(cafile=certifi.where())
+                async with session.post(webhook_url, data=form_data, ssl=sslcontext) as response:
                     if response.status == 200:
                         print("Discord uploaded successful")
                         if not config['Misc'].getboolean('save images'):
                             osd_message('Scorecard uploaded')
                     else:
                         text = await response.text()
+                        osd_message('Discord upload failed. Check log')
                         raise RuntimeError(f'Discord upload failed. Reason: {response.status} {text}')
         except Exception as e:
+            osd_message('Discord upload failed. Check log')
             raise RuntimeError(f"An error occurred during image upload: {repr(e)}")
     else:
+        osd_message('Discord upload failed. Check log')
         raise RuntimeWarning('Discord webhook url is empty!')
 
 

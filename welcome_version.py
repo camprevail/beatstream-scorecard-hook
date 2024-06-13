@@ -1,6 +1,6 @@
 from constants import MAP_KEY_NAME
 
-version = '1.1'
+version = '1.2'
 print(f'Beatstream Score Grabber - v{version}')
 print('Made for NBT-JAA-2016111400\n')
 print('Usage:')

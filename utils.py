@@ -134,7 +134,7 @@ def get_title_from_int(pm, CMusicInfoData, music_id):
         title_ptr = pm.read_longlong(str_loc)
     else:
         title_ptr = str_loc
-    result = pm.read_string(title_ptr, 129, encoding='shift-jis')
+    result = pm.read_string(title_ptr, 129, encoding='cp932')
 
     return result
 
@@ -168,7 +168,7 @@ def get_artist_from_int(pm, CMusicInfoData, music_id):
         title_ptr = pm.read_longlong(str_loc)
     else:
         title_ptr = str_loc
-    result = pm.read_string(title_ptr, 129, encoding='shift-jis')
+    result = pm.read_string(title_ptr, 129, encoding='cp932')
 
     return result
 
